@@ -1,0 +1,75 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #ffffff;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+#controls {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+#controls label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 14px;
+}
+#controls input {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
+  padding: 5px;
+  margin-top: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+#controls button {
+  background-color: #6200ea;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  align-self: center;
+}
+#controls button:hover {
+  background-color: #3700b3;
+}
+#drop-zone {
+  width: 100%;
+  height: 200px;
+  border: 2px dashed #777;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transition: border-color 0.3s, opacity 0.5s, height 0.5s;
+  border-radius: 5px;
+}
+#drop-zone.hover,
+#drop-zone:hover {
+  border-color: #ffffff;
+  cursor: pointer;
+}
+#drop-zone.hidden {
+  opacity: 0;
+  pointer-events: none;
+  height: 0;
+  margin-bottom: 0;
+}
+#grid-container {
+  display: grid;
+}
+.grid-item {
+  object-fit: contain;
+  object-position: bottom center;
+  width: 100px; /* Default size, can be changed via inputs */
+  height: 100px; /* Default size, can be changed via inputs */
+}

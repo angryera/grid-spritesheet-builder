@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Grid</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <div id="controls">
+      <label>
+        Width:
+        <input type="number" id="width-input" value="150" />
+      </label>
+      <label>
+        Height:
+        <input type="number" id="height-input" value="150" />
+      </label>
+      <label>
+        Columns:
+        <input type="number" id="columns-input" value="3" />
+      </label>
+      <button id="download-button">Download as PNG</button>
+    </div>
+
+    <div id="drop-zone">Drag & Drop Images Here</div>
+    <div id="grid-container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+    <script src="./assets/script.js"></script>
+  </body>
+</html>
