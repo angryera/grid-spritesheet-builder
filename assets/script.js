@@ -41,21 +41,43 @@ downloadButton.addEventListener("click", () => {
 });
 
 function handleFiles(files) {
-  Array.from(files).forEach((file) => {
-    if (file.type.startsWith("image/")) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const img = document.createElement("img");
-        img.src = event.target.result;
-        img.classList.add("grid-item");
-        img.style.width = widthInput.value + "px";
-        img.style.height = heightInput.value + "px";
-        gridContainer.appendChild(img);
-      };
-      reader.readAsDataURL(file);
+  const sortedFiles = Array.from(files).sort((file1, file2) =>
+    file1.name.localeCompare(file2.name)
+  ); // Correct sorting
+
+  const processFile = (file) => {
+    return new Promise((resolve, reject) => {
+      if (file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = document.createElement("img");
+          img.src = event.target.result;
+          img.classList.add("grid-item");
+          img.style.width = widthInput.value + "px";
+          img.style.height = heightInput.value + "px";
+          gridContainer.appendChild(img);
+          resolve(); // Resolve when the image is added
+        };
+        reader.onerror = (error) => reject(error); // Reject in case of an error
+        reader.readAsDataURL(file);
+      } else {
+        resolve(); // Resolve immediately for non-image files
+      }
+    });
+  };
+
+  const processFilesSequentially = async () => {
+    for (const file of sortedFiles) {
+      try {
+        await processFile(file); // Wait for each file to finish before moving to the next
+      } catch (error) {
+        console.error("Error processing file:", file.name, error);
+      }
     }
-  });
-  updateGridLayout(); // Apply the current column value automatically
+    updateGridLayout(); // Apply the current column value automatically after all files are processed
+  };
+
+  processFilesSequentially(); // Start processing files in sequence
 }
 
 function updateGridLayout() {
